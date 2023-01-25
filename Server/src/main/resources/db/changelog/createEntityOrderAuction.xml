@@ -1,0 +1,36 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <changeSet id="20210402-9" author="Daniel">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="ORDER_AUCTION"/>
+            </not>
+        </preConditions>
+        <createTable tableName="ORDER_AUCTION">
+            <column name="ID" type="bigint">
+                <constraints primaryKey="true" primaryKeyName="order_auction_pk"/>
+            </column>
+            <column name="ORDER_ID" type="bigint">
+                <constraints referencedTableName="ORDER" referencedColumnNames="ID" foreignKeyName="oa_order_fk"/>
+            </column>
+            <column name="AUCTION_ID" type="bigint">
+                <constraints referencedTableName="AUCTION" referencedColumnNames="ID" foreignKeyName="oa_auction_fk"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="20210402-15" author="Daniel">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <sequenceExists sequenceName="ORDER_AUCTION_SEQ"/>
+            </not>
+        </preConditions>
+        <createSequence sequenceName="ORDER_AUCTION_SEQ"
+                        incrementBy="1"
+                        startValue="1"
+                        minValue="1"
+                        maxValue="999999999"/>
+    </changeSet>
+</databaseChangeLog>

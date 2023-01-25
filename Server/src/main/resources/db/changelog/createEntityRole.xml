@@ -1,0 +1,31 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <changeSet id="20230115-1" author="Daniel">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="ROLE"/>
+            </not>
+        </preConditions>
+        <createTable tableName="ROLE">
+            <column name="ID" type="bigint">
+                <constraints primaryKey="true" primaryKeyName="role_id_pk"/>
+            </column>
+            <column name="ROLES" type="varchar2(50)"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="20230115-2" author="Daniel">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <sequenceExists sequenceName="ROLE_SEQ"/>
+            </not>
+        </preConditions>
+        <createSequence sequenceName="ROLE_SEQ"
+                        incrementBy="1"
+                        startValue="1"
+                        minValue="1"
+                        maxValue="999999999"/>
+    </changeSet>
+</databaseChangeLog>

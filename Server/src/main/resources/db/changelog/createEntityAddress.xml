@@ -1,0 +1,39 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <changeSet id="20210402-1" author="Daniel">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="ADDRESS"/>
+            </not>
+        </preConditions>
+        <createTable tableName="ADDRESS">
+            <column name="ID" type="bigint">
+                <constraints primaryKey="true" primaryKeyName="address_id_pk"/>
+            </column>
+            <column name="USER_INFO_ID" type="bigint">
+                <constraints referencedTableName="USER_INFO" referencedColumnNames="ID" foreignKeyName="address_user_info_fk"/>
+            </column>
+            <column name="STREET" type="varchar2(50)"/>
+            <column name="STREET_NUMBER" type="varchar2(50)"/>
+            <column name="APARTMENT_NUMBER" type="varchar2(50)"/>
+            <column name="CITY" type="varchar2(50)"/>
+            <column name="ZIP_CODE" type="varchar2(50)"/>
+            <column name="COUNTRY" type="varchar2(50)"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="20210402-2" author="Daniel">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <sequenceExists sequenceName="ADDRESS_SEQ"/>
+            </not>
+        </preConditions>
+        <createSequence sequenceName="ADDRESS_SEQ"
+                        incrementBy="1"
+                        startValue="1"
+                        minValue="1"
+                        maxValue="999999999"/>
+    </changeSet>
+</databaseChangeLog>

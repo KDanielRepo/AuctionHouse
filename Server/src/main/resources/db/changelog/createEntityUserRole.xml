@@ -1,0 +1,36 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <changeSet id="20230115-3" author="Daniel">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="USER_ROLE"/>
+            </not>
+        </preConditions>
+        <createTable tableName="USER_ROLE">
+            <column name="ID" type="bigint">
+                <constraints primaryKey="true" primaryKeyName="user_role_id_pk"/>
+            </column>
+            <column name="USER_ID" type="bigint">
+                <constraints referencedTableName="USER" referencedColumnNames="ID" foreignKeyName="user_role_user_fk"/>
+            </column>
+            <column name="ROLE_ID" type="bigint">
+                <constraints referencedTableName="ROLE" referencedColumnNames="ID" foreignKeyName="user_role_role_fk"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="20230115-4" author="Daniel">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <sequenceExists sequenceName="USER_ROLE_SEQ"/>
+            </not>
+        </preConditions>
+        <createSequence sequenceName="USER_ROLE_SEQ"
+                        incrementBy="1"
+                        startValue="1"
+                        minValue="1"
+                        maxValue="999999999"/>
+    </changeSet>
+</databaseChangeLog>

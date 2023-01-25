@@ -1,0 +1,36 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet id="20210402-5" author="Daniel">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="ITEM_IMAGE"/>
+            </not>
+        </preConditions>
+        <createTable tableName="ITEM_IMAGE">
+            <column name="ID" type="bigint">
+                <constraints primaryKey="true" primaryKeyName="item_image_id_pk"/>
+            </column>
+            <column name="AUCTION_ID" type="bigint">
+                <constraints referencedTableName="AUCTION" referencedColumnNames="ID" foreignKeyName="item_image_auction_fk"/>
+            </column>
+            <column name="IMAGE" type="CLOB"/>
+            <column name="THUMBNAIL" type="boolean"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="20210402-6" author="Daniel">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <sequenceExists sequenceName="ITEM_IMAGE_SEQ"/>
+            </not>
+        </preConditions>
+        <createSequence sequenceName="ITEM_IMAGE_SEQ"
+                        incrementBy="1"
+                        startValue="1"
+                        minValue="1"
+                        maxValue="999999999"/>
+    </changeSet>
+</databaseChangeLog>

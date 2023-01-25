@@ -1,0 +1,40 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <changeSet id="20210402-3" author="Daniel">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="AUCTION"/>
+            </not>
+        </preConditions>
+        <createTable tableName="AUCTION">
+            <column name="ID" type="bigint">
+                <constraints primaryKey="true" primaryKeyName="auction_id_pk"/>
+            </column>
+            <column name="USER_ID" type="bigint">
+                <constraints referencedTableName="USERS" referencedColumnNames="ID" foreignKeyName="auction_user_fk"/>
+            </column>
+            <column name="TITLE" type="varchar2(255)"/>
+            <column name="DESCRIPTION" type="varchar2(2000)"/>
+            <column name="AUCTION_START" type="TIMESTAMP"/>
+            <column name="AUCTION_END" type="TIMESTAMP"/>
+            <column name="PRICE" type="number(15,2)"/>
+            <column name="QUANTITY" type="int"/>
+            <column name="ACTIVE" type="boolean"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="20210402-4" author="Daniel">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <sequenceExists sequenceName="AUCTION_SEQ"/>
+            </not>
+        </preConditions>
+        <createSequence sequenceName="AUCTION_SEQ"
+                        incrementBy="1"
+                        startValue="1"
+                        minValue="1"
+                        maxValue="999999999"/>
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,33 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet id="20210402-7" author="Daniel">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="ORDER"/>
+            </not>
+        </preConditions>
+        <createTable tableName="ORDER">
+            <column name="ID" type="bigint">
+                <constraints primaryKey="true" primaryKeyName="order_id_pk"/>
+            </column>
+            <column name="CREATION_DATE" type="TIMESTAMP"/>
+            <column name="ORDER_STATUS" type="varchar2(30)"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="20210402-8" author="Daniel">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <sequenceExists sequenceName="ORDER_SEQ"/>
+            </not>
+        </preConditions>
+        <createSequence sequenceName="ORDER_SEQ"
+                        incrementBy="1"
+                        startValue="1"
+                        minValue="1"
+                        maxValue="999999999"/>
+    </changeSet>
+</databaseChangeLog>

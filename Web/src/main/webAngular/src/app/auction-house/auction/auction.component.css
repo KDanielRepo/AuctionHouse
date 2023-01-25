@@ -1,0 +1,35 @@
+  .left{
+    margin-left: 10em;
+    float: left;
+    background: rgba(255,255,0,.7);
+  }
+  .right{
+    width: 65em;
+    margin-left: 2em;
+    margin-right: 10em;
+    float: left;
+    background: rgba(255,0,255,.7);
+  }
+  .bottom{
+    height: 100%;
+    width: 80%;
+    margin-right: 10%;
+    margin-left: 10%;
+    float: left;
+    background: rgba(0,255,255,.7);
+    color: white;
+    font-size: medium;
+  }
+  .album{
+    margin-top: 1%;
+    margin-bottom: 1%;
+    color: white;
+    font-size: medium;
+  }
+.padding-0 {
+    padding-right: 0;
+    padding-left: 1;
+}
+.row {
+    padding-top: 4em;
+}

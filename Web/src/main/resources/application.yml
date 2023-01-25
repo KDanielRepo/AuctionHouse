@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: Web
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+
+#spring:
+#  datasource:
+#    url: jdbc:oracle:thin:@localhost:1521:OraDoc
+#    username: Testing
+#    password: Testing123
+#    driver-class-name: oracle.jdbc.OracleDriver
+#  liquibase:
+#    changelog: "classpath:db/changelog/db.changelog-master.xml"

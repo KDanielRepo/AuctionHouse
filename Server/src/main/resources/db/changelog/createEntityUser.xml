@@ -1,0 +1,38 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet id="20210402-10" author="Daniel">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="USERS"/>
+            </not>
+        </preConditions>
+        <createTable tableName="USERS">
+            <column name="ID" type="bigint">
+                <constraints primaryKey="true" primaryKeyName="users_id_pk"/>
+            </column>
+            <column name="LOGIN" type="varchar2(500)"/>
+            <column name="PASSWORD" type="varchar2(500)"/>
+            <column name="USER_INFO_ID" type="bigint">
+                <constraints referencedTableName="USER_INFO" referencedColumnNames="ID" foreignKeyName="user_user_info_fk"/>
+            </column>
+            <column name="DELETED" type="boolean"/>
+            <column name="BANNED" type="boolean"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="20210402-11" author="Daniel">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <sequenceExists sequenceName="USERS_SEQ"/>
+            </not>
+        </preConditions>
+        <createSequence sequenceName="USERS_SEQ"
+                        incrementBy="1"
+                        startValue="1"
+                        minValue="1"
+                        maxValue="999999999"/>
+    </changeSet>
+</databaseChangeLog>
