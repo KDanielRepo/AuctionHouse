@@ -5,6 +5,7 @@ import {Cart} from "./models/cart.model";
 import {AuctionHouseService} from "./services/auction-house.service";
 import {Auction} from "./models/auction.model";
 import {Subscription} from "rxjs/internal/Subscription";
+import { TokenStorageService } from './services/token-storage.service';
 
 @Component({
   selector: 'app-auction-house',
@@ -19,18 +20,26 @@ export class AuctionHouseComponent implements OnInit {
     private shoppingCartOrders: Cart;
     productSelected: boolean = false;
     sub: Subscription;
+    isLoggedIn = false;
+    username?: string;
 
     @ViewChild('shoppingCartC')
-    shoppingCartC: ShoppingCartComponent;
+        shoppingCartC: ShoppingCartComponent;
 
-    constructor(private auctionHouseService: AuctionHouseService) {
+    constructor(private auctionHouseService: AuctionHouseService, private tokenStorageService: TokenStorageService) {
     }
 
     ngOnInit() {
-    console.log("jestem w test");
-        this.auctionOrders = [];
-        this.loadAuctions();
-        this.loadOrders();
+            this.auctionOrders = [];
+            this.loadAuctions();
+            this.loadOrders();
+            this.isLoggedIn = !!this.tokenStorageService.getToken();
+
+            if (this.isLoggedIn) {
+            const user = this.tokenStorageService.getUser();
+
+            this.username = user.username;
+        }
     }
 
     ngOnDestroy() {
@@ -62,9 +71,13 @@ export class AuctionHouseComponent implements OnInit {
             (error) => console.log(error)
         );
     }
-    loadOrders() {
-        this.sub = this.auctionHouseService.AuctionOrderChanged.subscribe(() => {
-            this.shoppingCartOrders = this.auctionHouseService.Cart;
-        });
-    }
+    logout(): void {
+        this.tokenStorageService.signOut();
+        window.location.reload();
+      }
+      loadOrders() {
+              this.sub = this.auctionHouseService.AuctionOrderChanged.subscribe(() => {
+                  this.shoppingCartOrders = this.auctionHouseService.Cart;
+              });
+          }
 }

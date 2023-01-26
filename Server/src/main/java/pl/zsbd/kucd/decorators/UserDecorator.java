@@ -8,6 +8,7 @@ import pl.zsbd.kucd.entity.UserInfo;
 import pl.zsbd.kucd.mapper.UserMapper;
 import pl.zsbd.kucd.entity.Role;
 import pl.zsbd.kucd.enums.Roles;
+import pl.zsbd.kucd.repository.RoleRepository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -19,6 +20,9 @@ public abstract class UserDecorator implements UserMapper {
     @Autowired
     @Qualifier("delegate")
     private UserMapper delegate;
+
+    @Autowired
+    private RoleRepository roleRepository;
 
     @PersistenceContext
     private EntityManager em;
@@ -36,11 +40,14 @@ public abstract class UserDecorator implements UserMapper {
         User user = delegate.toEntity(dto);
         if(Objects.isNull(user.getId())){
             UserInfo userInfo = new UserInfo();
+            userInfo.setEmail(dto.getEmail());
             user.setUserInfo(userInfo);
         }
         //todo Poprawić
-        Role role = new Role();
-        role.setRoles(Roles.ROLE_USER);
+        Role role = em.getReference(Role.class, roleRepository.findIdByRoles(Roles.ROLE_USER));
+        //UserRole userRole = new UserRole();
+        //userRole.setRole(role);
+        //userRole.setUser(user);
         user.setRoles(Collections.singleton(role));
         user.getUserInfo().setEmail(dto.getEmail());
         user.getUserInfo().setPhoneNumber(dto.getPhoneNumber());

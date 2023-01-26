@@ -54,5 +54,8 @@ export class AuctionComponent implements OnInit {
   get auctionAuctionEnd(){
     return (this.auction && this.auction.auctionEnd) ? this.auction.auctionEnd : 0
   }
+  get auctionDescription(){
+      return (this.auction && this.auction.description) ? this.auction.description : "Brak opisu"
+    }
 
 }

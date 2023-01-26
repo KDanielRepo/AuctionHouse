@@ -26,7 +26,7 @@ public abstract class AuctionDecorator implements AuctionMapper {
     public Auction toEntity(AuctionDTO dto) {
         Auction auction = delegate.toEntity(dto);
         if(Objects.isNull(auction.getUser())){
-            auction.setUser(em.getReference(User.class, 1L));
+            auction.setUser(em.getReference(User.class, 17L));
         }
         return auction;
     }

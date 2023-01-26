@@ -14,7 +14,7 @@
                 <constraints primaryKey="true" primaryKeyName="user_role_id_pk"/>
             </column>
             <column name="USER_ID" type="bigint">
-                <constraints referencedTableName="USER" referencedColumnNames="ID" foreignKeyName="user_role_user_fk"/>
+                <constraints referencedTableName="USERS" referencedColumnNames="ID" foreignKeyName="user_role_user_fk"/>
             </column>
             <column name="ROLE_ID" type="bigint">
                 <constraints referencedTableName="ROLE" referencedColumnNames="ID" foreignKeyName="user_role_role_fk"/>

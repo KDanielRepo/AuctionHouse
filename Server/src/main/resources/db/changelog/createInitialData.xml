@@ -90,11 +90,11 @@
             <tableExists tableName="ROLE"/>
         </preConditions>
         <insert tableName="ROLE">
-            <column name="ID" valueComputed="select ROLE_SEQ.nextval from dual;"/>
+            <column name="ID" valueSequenceNext="ROLE_SEQ"/>
             <column name="ROLES" value="ROLE_ADMIN"/>
         </insert>
         <insert tableName="ROLE">
-            <column name="ID" valueComputed="select ROLE_SEQ.nextval from dual;"/>
+            <column name="ID" valueSequenceNext="ROLE_SEQ"/>
             <column name="ROLES" value="ROLE_USER"/>
         </insert>
     </changeSet>

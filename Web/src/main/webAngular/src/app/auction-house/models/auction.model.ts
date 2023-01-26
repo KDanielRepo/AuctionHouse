@@ -5,6 +5,7 @@ export class Auction {
     quantity: number;
     auctionEnd?: string;
     pictureUrl?: string;
+    description: string;
     constructor() {
 /*        this.id = id;
         this.title = title;

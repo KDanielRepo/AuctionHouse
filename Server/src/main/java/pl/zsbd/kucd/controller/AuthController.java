@@ -8,7 +8,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+import pl.zsbd.kucd.dto.ResponseDTO;
 import pl.zsbd.kucd.dto.UserDTO;
+import pl.zsbd.kucd.entity.User;
 import pl.zsbd.kucd.mapper.UserMapper;
 import pl.zsbd.kucd.repository.UserRepository;
 import pl.zsbd.kucd.security.JwtResponse;
@@ -36,10 +38,10 @@ public class AuthController {
 
     private final UserMapper userMapper;
 
-    JwtUtils jwtUtils;
+    private final JwtUtils jwtUtils;
 
     @PostMapping("/login")
-    public ResponseEntity<?> authenticateUser(@Valid @RequestBody UserDTO loginRequest) {
+    public ResponseEntity<?> authenticateUser(@RequestBody UserDTO loginRequest) {
 
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(loginRequest.getLogin(), loginRequest.getPassword()));
@@ -60,22 +62,23 @@ public class AuthController {
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<?> registerUser(@Valid @RequestBody UserDTO signUpRequest) {
+    public ResponseEntity<?> registerUser(@RequestBody UserDTO signUpRequest) {
         if (userRepository.existsByLogin(signUpRequest.getLogin())) {
             return ResponseEntity
                     .badRequest()
-                    .body("Error: Username is already taken!");
+                    .body(new ResponseDTO("Error: Username is already taken!"));
         }
 
         if (userRepository.existsByEmail(signUpRequest.getEmail())) {
             return ResponseEntity
                     .badRequest()
-                    .body("Error: Email is already in use!");
+                    .body(new ResponseDTO("Error: Email is already in use!"));
         }
 
         signUpRequest.setPassword(encoder.encode(signUpRequest.getPassword()));
-        userService.save(userMapper.toEntity(signUpRequest));
+        User user = userMapper.toEntity(signUpRequest);
+        userService.save(user);
 
-        return ResponseEntity.ok("User registered successfully!");
+        return ResponseEntity.ok(new ResponseDTO("User registered successfully!"));
     }
 }

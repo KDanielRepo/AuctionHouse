@@ -18,6 +18,7 @@ import { PaginationComponent } from './auction-house/pagination/pagination.compo
 import { NgxPaginationModule } from 'ngx-pagination';
 import { CreateAuctionComponent } from './auction-house/create-auction/create-auction.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AuthInterceptor } from './auction-house/interceptors/auth-interceptor';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     NgxPaginationModule,
     NgbModule,
   ],
-  providers: [AuctionHouseService],
+  providers: [AuctionHouseService, AuthInterceptor],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

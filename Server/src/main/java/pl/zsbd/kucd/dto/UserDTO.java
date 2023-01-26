@@ -10,6 +10,6 @@ public class UserDTO extends AbstractDTO {
     private Long userInfoId;
     private String email;
     private Integer phoneNumber;
-    private Boolean deleted;
-    private Boolean banned;
+    private Boolean deleted = Boolean.FALSE;
+    private Boolean banned = Boolean.FALSE;
 }

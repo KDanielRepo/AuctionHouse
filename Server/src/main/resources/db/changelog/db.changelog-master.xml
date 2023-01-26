@@ -11,4 +11,6 @@
     <include file="createEntityAddress.xml" relativeToChangelogFile="true"/>
     <include file="createEntityOrderAuction.xml" relativeToChangelogFile="true"/>
     <include file="createInitialData.xml" relativeToChangelogFile="true"/>
+    <include file="createEntityRole.xml" relativeToChangelogFile="true"/>
+    <include file="createEntityUserRole.xml" relativeToChangelogFile="true"/>
 </databaseChangeLog>

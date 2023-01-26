@@ -16,7 +16,7 @@ public class UserInfo extends AbstractEntity {
     private String surname;
     private String nickname;
     private Integer phoneNumber;
-    @OneToMany
+    @OneToMany(mappedBy = "userInfo")
     private List<Address> addresses;
     private String email;
 }

@@ -14,12 +14,12 @@ import java.util.Set;
 public class User extends AbstractEntity {
     private String login;
     private String password;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private UserInfo userInfo;
     private Boolean deleted;
     private Boolean banned;
-    @ManyToMany
-    @JoinTable(name = "user_roles",
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "user_role",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
