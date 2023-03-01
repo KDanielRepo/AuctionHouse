@@ -2,13 +2,16 @@ spring:
   application:
     name: Server
   datasource:
-    url: jdbc:oracle:thin:@localhost:1521:OraDoc
-    username: Testing
-    password: Testing123
-    driver-class-name: oracle.jdbc.OracleDriver
-    schema: TESTING
+    url: jdbc:mysql://auction-house-db.caj2ymy7edg0.eu-west-3.rds.amazonaws.com:3306/TESTING
+    username: MainUsername
+    password: Testing12#$
+    driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     show-sql: true
+    database_platform: org.hibernate.dialect.MySQL5Dialect
+    hibernate:
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
     properties:
       hibernate:
         format_sql: true

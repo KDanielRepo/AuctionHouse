@@ -45,8 +45,8 @@
             <column name="USER_INFO_ID" value="1"/>
             <column name="LOGIN" value="admin"/>
             <column name="PASSWORD" value="admin"/>
-            <column name="DELETED" value="0"/>
-            <column name="BANNED" value="0"/>
+            <column name="DELETED" valueBoolean="false"/>
+            <column name="BANNED" valueBoolean="false"/>
         </insert>
 
         <insert tableName="AUCTION">
@@ -54,11 +54,11 @@
             <column name="USER_ID" value="1"/>
             <column name="TITLE" value="Aukcja 1"/>
             <column name="DESCRIPTION" value="Test opisu 1"/>
-            <column name="AUCTION_START" valueComputed="(SELECT CURRENT_TIMESTAMP FROM dual)"/>
-            <column name="AUCTION_END" valueComputed="(SELECT CURRENT_TIMESTAMP+10 FROM dual)"/>
+            <column name="AUCTION_START" valueComputed="(SELECT CURRENT_TIMESTAMP())"/>
+            <column name="AUCTION_END" valueComputed="(SELECT DATE_ADD(CURRENT_TIMESTAMP(), INTERVAL 10 DAY))"/>
             <column name="PRICE" value="123"/>
             <column name="QUANTITY" value="11"/>
-            <column name="ACTIVE" value="1"/>
+            <column name="ACTIVE" valueBoolean="true"/>
         </insert>
 
         <insert tableName="AUCTION">
@@ -66,11 +66,11 @@
             <column name="USER_ID" value="1"/>
             <column name="TITLE" value="Aukcja 2"/>
             <column name="DESCRIPTION" value="Test opisu 2"/>
-            <column name="AUCTION_START" valueComputed="(SELECT CURRENT_TIMESTAMP FROM dual)"/>
-            <column name="AUCTION_END" valueComputed="(SELECT CURRENT_TIMESTAMP+10 FROM dual)"/>
+            <column name="AUCTION_START" valueComputed="(SELECT CURRENT_TIMESTAMP())"/>
+            <column name="AUCTION_END" valueComputed="(SELECT DATE_ADD(CURRENT_TIMESTAMP(), INTERVAL 10 DAY))"/>
             <column name="PRICE" value="234"/>
             <column name="QUANTITY" value="22"/>
-            <column name="ACTIVE" value="1"/>
+            <column name="ACTIVE" valueBoolean="true"/>
         </insert>
 
         <insert tableName="AUCTION">
@@ -78,11 +78,11 @@
             <column name="USER_ID" value="1"/>
             <column name="TITLE" value="Aukcja 3"/>
             <column name="DESCRIPTION" value="Test opisu 3"/>
-            <column name="AUCTION_START" valueComputed="(SELECT CURRENT_TIMESTAMP FROM dual)"/>
-            <column name="AUCTION_END" valueComputed="(SELECT CURRENT_TIMESTAMP+10 FROM dual)"/>
+            <column name="AUCTION_START" valueComputed="(SELECT CURRENT_TIMESTAMP())"/>
+            <column name="AUCTION_END" valueComputed="(SELECT DATE_ADD(CURRENT_TIMESTAMP(), INTERVAL 10 DAY))"/>
             <column name="PRICE" value="345"/>
             <column name="QUANTITY" value="33"/>
-            <column name="ACTIVE" value="0"/>
+            <column name="ACTIVE" valueBoolean="false"/>
         </insert>
     </changeSet>
     <changeSet id="20230115-5" author="Daniel">

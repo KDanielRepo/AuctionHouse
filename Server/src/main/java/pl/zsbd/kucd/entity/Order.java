@@ -18,7 +18,9 @@ public class Order extends AbstractEntity {
             joinColumns = @JoinColumn(name = "ORDER_ID"),
             inverseJoinColumns = @JoinColumn(name = "AUCTION_ID"))
     private List<Auction> items;
+    @Column(name = "CREATION_DATE")
     private ZonedDateTime creationDate;
     @Enumerated(EnumType.STRING)
+    @Column(name = "ORDER_STATUS")
     private OrderStatus orderStatus;
 }

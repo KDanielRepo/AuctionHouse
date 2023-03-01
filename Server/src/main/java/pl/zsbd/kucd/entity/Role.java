@@ -12,5 +12,6 @@ import javax.persistence.*;
 @SequenceGenerator(name = "SEQUENCES", sequenceName = "ROLE_SEQ", allocationSize = 1)
 public class Role extends AbstractEntity {
     @Enumerated(EnumType.STRING)
+    @Column(name = "ROLES")
     private Roles roles;
 }

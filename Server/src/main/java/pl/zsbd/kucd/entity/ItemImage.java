@@ -11,8 +11,10 @@ import javax.persistence.*;
 @SequenceGenerator(name = "SEQUENCES", sequenceName = "ITEM_IMAGE_SEQ", allocationSize = 1)
 public class ItemImage extends AbstractEntity {
     @Lob
+    @Column(name = "IMAGE")
     private byte[] image;
     @ManyToOne
     private Auction auction;
+    @Column(name = "THUMBNAIL")
     private Boolean thumbnail;
 }

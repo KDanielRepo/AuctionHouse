@@ -16,13 +16,20 @@ import java.util.List;
 public class Auction extends AbstractEntity {
     @ManyToOne
     private User user;
+    @Column(name = "TITLE")
     private String title;
+    @Column(name = "DESCRIPTION")
     private String description;
     @OneToMany(mappedBy = "auction")
     private List<ItemImage> itemImages;
+    @Column(name = "AUCTION_START")
     private ZonedDateTime auctionStart;
+    @Column(name = "AUCTION_END")
     private ZonedDateTime auctionEnd;
+    @Column(name = "PRICE")
     private BigDecimal price;
+    @Column(name = "QUANTITY")
     private Integer quantity;
+    @Column(name = "ACTIVE")
     private Boolean active;
 }
